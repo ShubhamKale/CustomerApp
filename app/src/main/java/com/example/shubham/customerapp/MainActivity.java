@@ -1,9 +1,12 @@
 package com.example.shubham.customerapp;
 
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +18,18 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.shubham.driverapp.R;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.entity.StringEntity;
+
+import static android.widget.Toast.*;
 
 
 public class MainActivity extends AppCompatActivity implements Communicator{
@@ -23,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements Communicator{
     EditText username, password;
     FrameLayout frame1,frame2;
     ViewGroup myview;
+    JSONArray mainarray=new JSONArray();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements Communicator{
                 FragmentTransaction ft = fm.beginTransaction();
                 login log = new login();
                 ft.replace(R.id.frame1, log, "OldFragment");
-                ft.addToBackStack(null);
+                ft.addToBackStack("");
                 ft.commit();
                 btnLogin.setVisibility(View.INVISIBLE);
                 btnsignup.setVisibility(View.INVISIBLE);
@@ -51,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements Communicator{
         btnsignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myview=(ViewGroup)findViewById(R.id.frame2);
+                myview = (ViewGroup) findViewById(R.id.frame2);
                 frame1.setVisibility(View.VISIBLE);
                 frame1.setLayoutParams(new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
                 FragmentManager fm = getFragmentManager();
@@ -97,7 +113,58 @@ public class MainActivity extends AppCompatActivity implements Communicator{
         }
         else
         {
-            Toast t=Toast.makeText(this,str,Toast.LENGTH_SHORT);
+            Toast t= makeText(this, str, LENGTH_SHORT);
         }
+    }
+    @Override
+    public void changetodrop(JSONObject obj) {
+        mainarray.put(obj);
+        getFragmentManager().beginTransaction().replace(R.id.tab1,new DropPoint()).commit();
+    }
+
+    @Override
+    public void changetofinal(JSONArray obj)  {
+        mainarray.put(obj);
+
+        AsyncHttpClient client=new AsyncHttpClient();
+        StringEntity entitiy= null;
+        try {
+            entitiy = new StringEntity(mainarray.toString());
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        client.post(this, "http://www.geeksstuff.org/alpha/vdata.php", entitiy, "application/json", new TextHttpResponseHandler() {
+            @Override
+            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+
+            }
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                Log.e("TAG", responseString);
+                getFragmentManager().beginTransaction().replace(R.id.tab1, new FinalPage()).commit();
+            }
+        });
+
+    }
+
+    @Override
+    public void gotofirst() {
+        getFragmentManager().beginTransaction().replace(R.id.tab1,new MainOrderPage()).commit();
+    }
+
+    @Override
+    public void changetotruck(JSONObject obj) {
+        mainarray.put(obj);
+        getFragmentManager().beginTransaction().replace(R.id.tab1,new TruckSelection()).commit();
+    }
+
+    public String change()
+    {
+        String s="";
+        frame1.setVisibility(View.INVISIBLE);
+        btnLogin.setVisibility(View.VISIBLE);
+        btnsignup.setVisibility(View.VISIBLE);
+        return s;
     }
 }

@@ -29,85 +29,10 @@
                 <LinearLayout
                     android:id="@+id/tab1"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="455dp"
                     android:orientation="vertical"
-                    android:background="#ffffff">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Pickup Point"
-                        android:id="@+id/textView"
-                        android:layout_gravity="center_horizontal"
-                    />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="107dp"
-                        android:inputType="textPostalAddress"
-                        android:ems="10"
-                        android:id="@+id/address"
-                        android:hint="Address" />
-
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:weightSum="1">
-
-                        <EditText
-                            android:layout_width="186dp"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/city"
-                            android:hint="City" />
-
-                        <EditText
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/pincode"
-                            android:layout_gravity="right"
-                            android:inputType="number"
-                            android:hint="Pin code" />
-                    </LinearLayout>
-                    <EditText
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/state"
-                        android:hint="State" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="Personal Details(Optional)"
-                        android:id="@+id/textView4"
-                        android:layout_gravity="center_horizontal" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/fullname"
-                        android:layout_gravity="center_horizontal"
-                        android:hint="Name" />
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="phone"
-                        android:ems="10"
-                        android:id="@+id/mobileno"
-                        android:layout_gravity="center_horizontal"
-                        android:hint="Phone number" />
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Next"
-                        android:id="@+id/next"
-                        android:layout_gravity="center_horizontal" />
+                    android:background="#ffffff"
+                    android:weightSum="1">
 
                 </LinearLayout>
 
