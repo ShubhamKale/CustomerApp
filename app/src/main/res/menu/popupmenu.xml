@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/item_movies"
+        android:showAsAction="ifRoom|withText"
+        android:title="New"
+        android:visible="true"
+        tools:ignore="AppCompatResource" />
+
+</menu>
