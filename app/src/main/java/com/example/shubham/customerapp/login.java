@@ -1,4 +1,4 @@
-package com.example.shubham.driverapp;
+package com.example.shubham.customerapp;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.example.shubham.driverapp.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.TextHttpResponseHandler;
 

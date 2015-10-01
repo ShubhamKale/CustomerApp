@@ -1,4 +1,4 @@
-package com.example.shubham.driverapp;
+package com.example.shubham.customerapp;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TabHost;
 
+import com.example.shubham.driverapp.R;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestHandle;
@@ -65,10 +66,13 @@ public class MainPanel extends Fragment{
             public void onClick(View v) {
                 AsyncHttpClient web=new AsyncHttpClient();
                 final JSONObject[] data = {null};
-                String add=address.getText().toString();
+                final String add=address.getText().toString();
+                final String cityname=city.getText().toString();
+                final String pin=pincode.getText().toString();
+                final String statename=state.getText().toString();
                 String ne=add.replaceAll(" ","+");
                 JsonHttpResponseHandler json=new JsonHttpResponseHandler();
-                RequestHandle handle=web.post(getActivity(), "https://maps.googleapis.com/maps/api/geocode/json?address=+" + ne + "+" + city.getText().toString() + "+" + pincode.getText().toString() + "+" + state.getText().toString() + "+&sensor=false&components=country%3aIN&key=AIzaSyD2vaD7LdiKd67IuK98sKyeCGf0e6gabNw", null, new TextHttpResponseHandler() {
+                RequestHandle handle=web.post(getActivity(), "https://maps.googleapis.com/maps/api/geocode/json?address=+" + ne + "+" + cityname + "+" +pin + "+" + statename + "+&sensor=false&components=country%3aIN&key=AIzaSyD2vaD7LdiKd67IuK98sKyeCGf0e6gabNw", null, new TextHttpResponseHandler() {
                     @Override
                     public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
 
@@ -83,12 +87,12 @@ public class MainPanel extends Fragment{
                             try {
                                 JSONArray array= data[0].getJSONArray("results");
                                 Log.e("TAG","Got json array");
-                                for(int i=0;i<array.length();i++)
-                                {
-                                    Log.e("TAG","Object form the array"+i);
-                                    JSONObject obj=array.getJSONObject(i);
-                                    Log.e("TAG",obj.getString("formatted_address"));
-                                }
+                                JSONObject obj=array.getJSONObject(0);
+                                JSONObject obj1=obj.getJSONObject("geometry");
+                                String lat=obj1.getJSONObject("location").getString("lat");
+                                String log=obj1.getJSONObject("location").getString("lng");
+                                String fulladdress=add+cityname+pin+statename;
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

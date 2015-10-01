@@ -1,12 +1,9 @@
-package com.example.shubham.driverapp;
+package com.example.shubham.customerapp;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Fade;
-import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +13,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import com.example.shubham.driverapp.R;
 
 
 public class MainActivity extends AppCompatActivity implements Communicator{

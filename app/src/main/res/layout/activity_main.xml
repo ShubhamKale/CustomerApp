@@ -27,7 +27,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:id="@+id/fragment2"
-            android:name="com.example.shubham.driverapp.MainPanel"
+            android:name="com.example.shubham.customerapp.MainPanel"
             tools:layout="@layout/fragment_main_panel" />
     </FrameLayout>
 

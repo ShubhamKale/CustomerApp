@@ -1,4 +1,4 @@
-package com.example.shubham.driverapp;
+package com.example.shubham.customerapp;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
